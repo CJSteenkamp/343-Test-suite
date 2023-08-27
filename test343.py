@@ -14,10 +14,18 @@ class TextColor:
 API_URL = 'https://api.github.com'
 TEST_URL = 'http://127.0.0.1:5000'
 
+GITHUB_TOKEN = ''  # Replace this with your GitHub token
+
+def APIcurl(url):
+    headers = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
+    response = requests.get(url, headers=headers)
+    return json.loads(response.text) 
+
 def APIuser(username):
     url = API_URL+"/users/"+username
-    apireq = requests.get(url)
-    apijson = json.loads(apireq.text)
+    # apireq = requests.get(url)
+    # apijson = json.loads(apireq.text)
+    apijson = APIcurl(url)
 
     # print(json.dumps(apijson, indent=2))
 
@@ -97,8 +105,9 @@ def test_user(username):
 
 def APIrepo(user, params):
     url = API_URL+f"/users/{user}/repos"
-    apireq = requests.get(url, params=params)
-    apijson = json.loads(apireq.text)
+    # apireq = requests.get(url, params=params)
+    # apijson = json.loads(apireq.text)
+    apijson = APIcurl(url)
 
     # print(json.dumps(apijson, indent=2))
 
@@ -212,6 +221,8 @@ def getuserfiledata(filename):
     
 usersjson = getuserfiledata("users.test")
 reposjson = getrepofilejson("repos.test")
+
+print(usersjson)
 
 # test_user(usersjson)
 test_repos(reposjson)
