@@ -93,7 +93,7 @@ def test_user(username):
             if key not in test:
                 # Dont have the field
                 fail = True
-                message = TextColor.RED + f"{key}"+ TextColor.RESET + "field not found!"  + '\n'
+                message = TextColor.RED + f"{key:<20}"+ TextColor.RESET + "field not found!"  + '\n'
                 continue
 
             if (api[key] == test[key] or api[key] == None and test[key] == "" or api[key] == "" and test[key] == None):
@@ -104,9 +104,9 @@ def test_user(username):
                 message += f"{key:<20} " + TextColor.RED + "Incorrect! 😞"+ TextColor.RESET + f"\n\tAPI  : \"{api[key]}\"\n\tTest : \"{test[key]}\"\n"
         
         if fail:
-            message = TextColor.RED + f"GET users/{user} FAILED 😞" + TextColor.RESET + '\n' + message
+            message = TextColor.RED + f"GET users/{user:<50} FAILED 😞" + TextColor.RESET + '\n' + message
         else:
-            message = TextColor.GREEN +f"GET users/{user} PASSED 😊" + TextColor.RESET + '\n'
+            message = TextColor.GREEN +f"GET users/{user:<50} PASSED 😊" + TextColor.RESET + '\n'
         print(message)
 
 def APIrepo(user, params):
