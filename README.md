@@ -11,6 +11,7 @@ Welcome to the 343-Test-suite! This repository contains a set of tests designed 
 3. **GitHub Token:** In order to run some of the tests, you'll need to provide a GitHub token. Please follow the steps below to add your token:
 
    - Visit [GitHub Personal Access Tokens](https://github.com/settings/tokens) to generate a new token with the necessary permissions.
+   - Make sure it is a classic token otherwise it will not work
    - Copy the generated token.
    - In the `test343.py` file, locate the `GITHUB_TOKEN` variable. Replace it with your actual GitHub token.
 

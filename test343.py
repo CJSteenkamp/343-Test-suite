@@ -234,4 +234,4 @@ usersjson = getuserfiledata("users.test")
 reposjson = getrepofilejson("repos.test")
 
 test_user(usersjson)
-# test_repos(reposjson)
+test_repos(reposjson)
