@@ -27,6 +27,9 @@ def APIuser(username):
     # apijson = json.loads(apireq.text)
     apijson = APIcurl(url)
 
+    if ("message" in apijson):
+        return apijson
+
     # print(json.dumps(apijson, indent=2))
 
     apiuser = {
@@ -53,6 +56,9 @@ def TESTuser(username):
     url = TEST_URL+"/users/"+username
     testreq = requests.get(url)
     testjson = json.loads(testreq.text)
+
+    if ("message" in testjson):
+        return testjson
 
     # print(json.dumps(testjson, indent=2))
 
@@ -105,9 +111,12 @@ def test_user(username):
 
 def APIrepo(user, params):
     url = API_URL+f"/users/{user}/repos"
-    # apireq = requests.get(url, params=params)
+    apireq = requests.get(url, params=params)
     # apijson = json.loads(apireq.text)
-    apijson = APIcurl(url)
+    apijson = APIcurl(apireq.url)
+    
+    if ("message" in apijson):
+        return apijson
 
     # print(json.dumps(apijson, indent=2))
 
@@ -147,8 +156,10 @@ def TESTrepo(user, params):
     url = TEST_URL+f"/users/{user}/repos"
     testapi = requests.get(url, params=params)
     testjson = json.loads(testapi.text)
-
     # print(json.dumps(testjson, indent=2))
+    
+    if ("message" in testjson):
+        return testjson
 
     repoData = []
     for repo in testjson:
@@ -222,7 +233,5 @@ def getuserfiledata(filename):
 usersjson = getuserfiledata("users.test")
 reposjson = getrepofilejson("repos.test")
 
-print(usersjson)
-
-# test_user(usersjson)
-test_repos(reposjson)
+test_user(usersjson)
+# test_repos(reposjson)
